@@ -1,13 +1,25 @@
-const express = require('express'); 
-const app = express(); 
-const port = 3000; 
+// Express 모듈을 가져옵니다
+const express = require('express');
 
-// 기본 라우트 설정
-app.get('/', (req, res) => {
-    res.send('Hello, Node.js with Express!');
+// Express 앱을 생성합니다
+const app = express();
+const port = 2007;
+
+// 루트 경로에 대한 GET 요청 처리
+app.get('/swag', (req, res) => {
+  // 클라이언트로 보낼 메시지
+  res.send('get swag');
 });
 
-// 서버 실행
-app.listen(port, () => {
-    console.log(`서버 실행 중: http://localhost:${port}`);
+app.post('/swag', (req, res) => {
+  // 클라이언트로 보낼 메시지
+  res.send('post swag');
 });
+
+// 서버가 3000번 포트에서 요청을 기다립니다
+app.listen(2007, () => {
+  console.log(`Server running at http://localhost:${port}}/`);
+});
+
+
+
