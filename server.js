@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 const port = 2007;
 
+app.use(express.json())
+
 // 루트 경로에 대한 GET 요청 처리
 app.get('/swag', (req, res) => {
   // 클라이언트로 보낼 메시지
@@ -13,7 +15,7 @@ app.get('/swag', (req, res) => {
 
 app.post('/swag', (req, res) => {
   // 클라이언트로 보낼 메시지
-  res.send('post swag');
+  res.send(req.body);
 });
 
 // 서버가 3000번 포트에서 요청을 기다립니다
