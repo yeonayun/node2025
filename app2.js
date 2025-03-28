@@ -14,10 +14,10 @@ console.log(__dirname + '\\views');
 const travelList = ['뉴욕', '파리', '우리집', '하와이', '영호집', '별이집'];
 
 app.get('/travel', (req, res) => {
-    res.render('travel', {travelList});
+  res.render('travel', { travelList });
 });
 
 app.listen(2007, () => {
-    console.log(`Server running at http://localhost:${port}}/`);
-  });
-  
+  console.log(`Server running at http://localhost:${port}}/`);
+});
+
