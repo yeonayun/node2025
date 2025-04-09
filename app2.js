@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const port = 2007;
+const port = 4567;
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -22,6 +22,9 @@ db.connect(err => {
   }
   console.log('MySQL 연결 성공!!');
 })
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.set('view engine', 'ejs');
 
@@ -60,6 +63,20 @@ app.get('/travel/:id', (req, res) => {
     res.render('travelDetail', { travel });
   });
 });
+
+
+app.post('/travel', (req, res) => {
+  const {name} = req.body;
+  const _query = 'INSERT INTO travellist (name) VALUES (?)';
+  db.query(_query, [name], (err, results) => {
+    if(err) {
+      console.error('데이터베이스 쿼리 실패 : ', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.redirect('/travel');
+  });
+})
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
