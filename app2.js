@@ -78,6 +78,10 @@ app.post('/travel', (req, res) => {
   });
 })
 
+app.get('/add-travel', (req, res)=>{
+  res.render('addTravel');
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
