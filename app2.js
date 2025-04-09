@@ -24,8 +24,7 @@ db.connect(err => {
 })
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
+app.use(express.urlencoded({extended : true}));
 app.set('view engine', 'ejs');
 
 // __dirname : 현재 파일이 속해있는 디렉토리의 절대 경로
@@ -78,9 +77,23 @@ app.post('/travel', (req, res) => {
   });
 })
 
-app.get('/add-travel', (req, res)=>{
-  res.render('addTravel');
+app.get('/add-travel',(req,res) => {
+    res.render('addTravel');
 });
+
+app.put('/travel/:id', (req, res) => {
+    const travelId = req.params.id;
+    const {name} = req.body;
+    const _query = 'UPDATE travellist SET name = ? WHERE id = ?';
+    db.query(_query, [name,travelId], (err, results) => {
+      if(err) {
+        console.error('데이터베이스 쿼리 실패 : ', err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+        res.render('updateSuccess');
+    });
+  });
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
