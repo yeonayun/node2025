@@ -111,6 +111,19 @@ app.put('/travel/:id', (req, res) => {
     res.render('addTravel');
   });
 
+  app.delete('/travel/:id', (req, res)=>{
+    const travelId = req.params.id;
+    const _query = 'DELETE FROM travellist WHERE id = ?';
+    db.query(_query, [travelId], (err, results)=>{
+      if(err){
+        console.error('데이터베이스 쿼리 실패', err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      res.render('deleteSuccess');
+    });
+  });
+
   app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
   });
