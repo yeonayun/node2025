@@ -2,25 +2,24 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>여행지 목록</title>
+    <meta charset="UTF-8">
+    <title>여행지 목록</title>
 </head>
 
 <body>
-  <h1>여행지 목록</h1>
-  <ul>
-    <% travelList.forEach(travel=> { %>
-      <li>
-        <a href="/travel/<%= travel.id %>"><%= travel.name %></a>
-        <a href="/travel/<%= travel.id %>/edit">수정</a>
-        <form action="/travel/<%= travel.id %>?_method=DELETE"
-          method="POST">
-          <button type="submit">삭제</button>
-        </form>
-      </li>
-      <% }) %>
-  </ul>
-  <a href="/add-travel">여행지 추가</a>
+    <h1>여행지 목록</h1>
+    <ul>
+        <% travelList.forEach(travel=> { %>
+            <li>
+                <a href="/travel/<%= travel.id %>"><%= travel.name %></a>
+                <a href="/travel/<%= travel.id %>/edit">수정</a>
+                <form action="/travel/<%= travel.id %>?_method=DELETE" method="POST">
+                    <button type="submit">삭제</button>
+                </form>
+            </li>
+            <% }) %>
+    </ul>
+    <a href="/travel/add">여행지 추가</a>
 </body>
 
 </html>
