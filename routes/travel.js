@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
+router.get('/add', (req, res)=>{
+  res.render('addTravel');
+})
+
 // 전체 게시글 목록 보여주는 페이지
 router.get('/:id', (req, res) => {
   const travelId = req.params.id;
@@ -13,17 +17,12 @@ router.get('/:id', (req, res) => {
       return;
     }
     const travel = results;
-    console.log(travel)
     res.render('travelDetail', {travel});
   });
 });
 
-router.get('/add', (req, res)=>{
-  res.render('addTravel');
-})
-
 // 게시글의 내용을 읽기
-router.get('', (req, res) => {
+router.get('/', (req, res) => {
   const _query = 'SELECT * FROM travellist';
   db.query(_query, (err, results) => {
     if(err){
@@ -37,7 +36,7 @@ router.get('', (req, res) => {
 });
 
 // 여행지 추가를 보여주는 페이지
-router.post('', (req, res) => {
+router.post('/', (req, res) => {
   const {name} = req.body;
   const _query = 'INSERT INTO travellist (name) VALUES (?)';
   db.query(_query, [name],(err, results) => {
@@ -46,7 +45,7 @@ router.post('', (req, res) => {
       res.status(500).send('Internal Server Error');
       return;
     }
-    res.redirect('');
+    res.redirect('/');
   });
 })
 
